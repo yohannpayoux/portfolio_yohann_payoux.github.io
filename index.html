@@ -111,6 +111,31 @@
     .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
     .project-footer { padding: 12px 20px 20px; }
     .project-wip { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 4px 10px; }
+    .project-card.clickable { cursor: pointer; }
+    .project-expand-hint { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); padding: 4px 0 0; }
+
+    /* MODAL PROJET */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.55); z-index: 200; align-items: flex-start; justify-content: center; padding: 60px 20px; overflow-y: auto; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--surface); border-radius: 14px; max-width: 760px; width: 100%; padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.25); animation: modalIn 0.25s ease; }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 32px 20px; border-bottom: 1px solid var(--border); }
+    .modal-header-title { font-family: var(--serif); font-size: 1.5rem; }
+    .modal-header-sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .modal-close { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 22px; line-height: 1; padding: 4px 8px; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    .modal-close:hover { background: var(--accent-light); color: var(--accent); }
+    .modal-body { padding: 24px 32px 32px; }
+    .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+    .modal-section { margin-bottom: 26px; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section-title { font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 10px; }
+    .modal-section ul { padding-left: 18px; }
+    .modal-section li { font-size: 13.5px; color: var(--text); line-height: 1.7; margin-bottom: 4px; }
+    .modal-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 22px; }
+    .modal-gallery-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg); }
+    .modal-gallery-item img { width: 100%; height: 140px; object-fit: cover; display: block; }
+    .modal-gallery-placeholder { height: 140px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-align: center; padding: 12px; }
+    .modal-gallery-caption { font-size: 11px; color: var(--muted); padding: 8px 12px; border-top: 1px solid var(--border); }
 
     /* A PROPOS */
     .about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -187,7 +212,7 @@
 <div id="page-accueil" class="page active">
   <div id="hero">
     <div class="hero-text fade-in">
-      <p class="hero-subtitle">Administrateur système &amp; réseau</p>
+      <p class="hero-subtitle">Recherche alternance Administration Systèmes et Réseaux</p>
       <div class="hero-h1-wrap">
         <h1>Yohann<br /><em>Payoux</em></h1>
       </div>
@@ -220,8 +245,12 @@
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" fill="none"/></svg>
         <a href="https://www.linkedin.com/in/yohannpayoux" target="_blank">linkedin.com/in/yohannpayoux</a>
       </div>
+      <div class="info-row">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 17a2 2 0 11-4 0 2 2 0 014 0zM20 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 17h-1v-4l1.5-4.5A2 2 0 016.4 7H15l4 4h1a2 2 0 012 2v4h-2M8 17h8"/></svg>
+        Permis B, véhiculé
+      </div>
       <span class="badge">🎓 Alternance 2 ans · Septembre 2026</span>
-      <p style="font-size:11px;color:var(--muted);margin-top:8px;">2 semaines entreprise · 1 semaine école</p>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;">2 jours entreprise · 3 jours en centre de formation</p>
     </div>
   </div>
 
@@ -235,7 +264,7 @@
     <div class="alt-inner">
       <div>
         <h3>Je recherche une alternance</h3>
-        <p>Disponible à partir de septembre 2026 sur un rythme 2 semaines entreprise · 1 semaine école. Motivé, curieux et passionné par les systèmes, réseaux et la cybersécurité.</p>
+        <p>Disponible à partir de septembre 2026 sur un rythme 2 jours entreprise · 3 jours en centre de formation. Motivé, curieux et passionné par les systèmes, réseaux et la cybersécurité.</p>
       </div>
       <button class="alt-btn" id="alt-contact">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -251,14 +280,16 @@
   <section>
     <div class="section-header fade-in"><h2>Compétences</h2><div class="line"></div></div>
     <div class="skills-grid fade-in">
-      <div class="skill-card"><div class="skill-name">Python</div><div class="skill-cat">Développement</div></div>
+      <div class="skill-card"><div class="skill-name">Python</div><div class="skill-cat">Intermédiaire</div></div>
+      <div class="skill-card"><div class="skill-name">Proxmox</div><div class="skill-cat">Intermédiaire</div></div>
+      <div class="skill-card"><div class="skill-name">Linux</div><div class="skill-cat">Intermédiaire</div></div>
+      <div class="skill-card"><div class="skill-name">Hack The Box</div><div class="skill-cat">Débutant</div></div>
+      <div class="skill-card"><div class="skill-name">Try Hack Me</div><div class="skill-cat">Débutant</div></div>
       <div class="skill-card"><div class="skill-name">C#</div><div class="skill-cat">Développement</div></div>
       <div class="skill-card"><div class="skill-name">JavaScript</div><div class="skill-cat">Développement</div></div>
       <div class="skill-card"><div class="skill-name">Microsoft 365</div><div class="skill-cat">Bureautique</div></div>
-      <div class="skill-card"><div class="skill-name">Cybersécurité</div><div class="skill-cat">Sécurité</div></div>
       <div class="skill-card"><div class="skill-name">Design 3D</div><div class="skill-cat">Conception</div></div>
       <div class="skill-card"><div class="skill-name">Diagnostic matériel</div><div class="skill-cat">Maintenance</div></div>
-      <div class="skill-card"><div class="skill-name">Systèmes d'exploitation</div><div class="skill-cat">Administration</div></div>
     </div>
     <div style="margin-top:32px" class="fade-in">
       <p style="font-size:13px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:500;">Savoir-être</p>
@@ -272,7 +303,7 @@
     <div class="timeline">
       <div class="timeline-item fade-in">
         <p class="timeline-date">Juillet 2025</p>
-        <p class="timeline-title">Stage volontaire — Maintenance &amp; vente de matériel informatique</p>
+        <p class="timeline-title">Stage volontaire — Breizhtic (Maintenance &amp; vente de matériel informatique)</p>
         <div class="timeline-desc"><ul><li>Diagnostic et réparation de pannes matérielles et logicielles sur PC</li><li>Réinstallation et configuration de systèmes d'exploitation</li><li>Utilisation d'outils de diagnostic : CrystalDiskInfo, CPU-Z, Memtest86</li></ul></div>
       </div>
       <div class="timeline-item fade-in">
@@ -334,18 +365,92 @@
         </div>
         <div class="project-footer"><span class="project-wip">Première · 2025</span></div>
       </div>
-      <div class="project-card fade-in" style="transition-delay:.2s">
-        <div class="project-banner">🐧</div>
+      <div class="project-card fade-in clickable" id="card-proxmox" style="transition-delay:.2s">
+        <div class="project-banner">🖥️</div>
         <div class="project-body">
-          <div class="project-tags"><span class="project-tag">Programmation</span><span class="project-tag">Patience</span><span class="project-tag">Base de données</span></div>
-          <div class="project-title">Déploiement d'un serveur Linux</div>
-          <div class="project-desc">Installation, configuration et administration d'un serveur sous Linux. Mise en place des services réseau, gestion des utilisateurs et sécurisation de l'environnement.</div>
+          <div class="project-tags"><span class="project-tag">Proxmox</span><span class="project-tag">Réseau</span><span class="project-tag">Sécurité</span><span class="project-tag">Docker</span></div>
+          <div class="project-title">Cluster Proxmox VE — Infrastructure personnelle</div>
+          <div class="project-desc">Conception et administration d'une infrastructure virtualisée complète : cluster 2 nœuds, segmentation réseau, durcissement sécurité et automatisation.</div>
+          <div class="project-expand-hint">Voir le détail →</div>
         </div>
-        <div class="project-footer"><span class="project-wip">Projet personnel · 2026</span></div>
+        <div class="project-footer"><span class="project-wip">Projet personnel · en cours</span></div>
       </div>
     </div>
   </section>
   <footer>Yohann Payoux — Portfolio</footer>
+</div>
+
+<!-- MODAL PROJET PROXMOX -->
+<div class="modal-overlay" id="modal-proxmox">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-header-title">Cluster Proxmox VE</div>
+        <div class="modal-header-sub">Infrastructure personnelle — projet en cours</div>
+      </div>
+      <button class="modal-close" id="modal-proxmox-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tags">
+        <span class="project-tag">Proxmox VE</span><span class="project-tag">Réseau</span><span class="project-tag">Sécurité</span><span class="project-tag">Docker</span><span class="project-tag">Automatisation</span>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Infrastructure</div>
+        <ul>
+          <li>Cluster Proxmox VE à 2 nœuds hébergeant plusieurs machines virtuelles Ubuntu 22.04</li>
+          <li>Migration de plusieurs services depuis des conteneurs LXC vers des VM dédiées, pour plus d'isolation et de stabilité</li>
+          <li>Environnement dédié à l'hébergement de services personnels et à l'expérimentation technique</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Réseau</div>
+        <ul>
+          <li>Segmentation via deux bridges réseau : un réseau principal (LAN) et un réseau isolé dédié aux tests de sécurité</li>
+          <li>Configuration NAT/PAT sur la box internet (plus de 10 règles de redirection de ports)</li>
+          <li>Réservations DHCP statiques par adresse MAC et configuration IP statique (Netplan) sur chaque VM</li>
+          <li>Nom de domaine dynamique et accès distant sécurisé via VPN (Tailscale), sans exposition directe de l'interface d'administration</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Sécurité</div>
+        <ul>
+          <li>Protection anti-intrusion : Fail2ban et CrowdSec (bouncer firewall) sur les machines exposées</li>
+          <li>Audit système avec règles personnalisées (auditd)</li>
+          <li>Authentification à deux facteurs (2FA TOTP) et clés SSH ed25519 avec passphrase</li>
+          <li>Désactivation de l'authentification par mot de passe SSH, pare-feu Proxmox en politique par défaut restrictive</li>
+          <li>Mises à jour automatiques de sécurité sur l'ensemble des machines</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Automatisation</div>
+        <ul>
+          <li>Script Bash + service systemd pour la gestion automatique du cycle de vie des VM (extinction planifiée, réveil programmé via RTC)</li>
+          <li>Déploiement de services via Docker Compose (reverse proxy Nginx, certificats SSL Let's Encrypt)</li>
+          <li>Diagnostic et récupération d'un incident de base de données en production (MariaDB) sur un service auto-hébergé</li>
+          <li>Plateforme d'orchestration de services conteneurisés avec résolution de conflits réseau inter-conteneurs</li>
+        </ul>
+      </div>
+
+      <div class="modal-gallery">
+        <div class="modal-gallery-item">
+          <div class="modal-gallery-placeholder">Capture : panel Proxmox VE (à ajouter)</div>
+          <div class="modal-gallery-caption">Vue du cluster Proxmox</div>
+        </div>
+        <div class="modal-gallery-item">
+          <div class="modal-gallery-placeholder">Capture : interface Nextcloud (à ajouter)</div>
+          <div class="modal-gallery-caption">Service auto-hébergé</div>
+        </div>
+        <div class="modal-gallery-item">
+          <div class="modal-gallery-placeholder">Schéma réseau (à ajouter)</div>
+          <div class="modal-gallery-caption">Architecture réseau et segmentation</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- A PROPOS -->
@@ -404,7 +509,7 @@
   <div id="contact-banner" class="fade-in">
     <div>
       <h2>Disponibilité &amp; rythme</h2>
-      <p>Alternance de 2 ans à partir de septembre 2026, rythme 2 semaines entreprise · 1 semaine école. Idéalement autour de Rennes, dans le domaine des systèmes, réseaux ou de la cybersécurité.</p>
+      <p>Alternance de 2 ans à partir de septembre 2026, rythme 2 jours entreprise · 3 jours en centre de formation. Idéalement autour de Rennes, dans le domaine des systèmes, réseaux ou de la cybersécurité.</p>
     </div>
     <div class="contact-links">
       <a href="mailto:yohann.payoux1@gmail.com" class="contact-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>yohann.payoux1@gmail.com</a>
@@ -446,6 +551,12 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('#page-accueil .fade-in').forEach(function(el){ obs.observe(el); });
   });
+
+  var proxmoxModal = document.getElementById('modal-proxmox');
+  document.getElementById('card-proxmox').addEventListener('click', function(){ proxmoxModal.classList.add('open'); });
+  document.getElementById('modal-proxmox-close').addEventListener('click', function(){ proxmoxModal.classList.remove('open'); });
+  proxmoxModal.addEventListener('click', function(e){ if (e.target === proxmoxModal) proxmoxModal.classList.remove('open'); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') proxmoxModal.classList.remove('open'); });
 </script>
 </body>
 </html>
